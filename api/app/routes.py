@@ -88,7 +88,7 @@ def queryholders2(names,depth):
     if depth == 1:
         return nodes
     else:
-        return queryholders(a, depth - 1)
+        return queryholders2(a, depth - 1)
 #print(queryholders2(['招商银行股份有限公司'],2))
 def combine(names,depth):
     return queryholders(names,depth)+queryholders2(names,depth)
