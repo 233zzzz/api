@@ -218,7 +218,7 @@ def enterprise_search():
                     #mimetype="application/json")
     return dumps([serialize_company(i) for i in rv],ensure_ascii=False)
 
-@app.route("/holder")
+@app.route("/holdername")
 def holder_search():
     try:
         name= request.args["name"]
@@ -232,25 +232,26 @@ def holder_search():
         a = combine(name,depth)
     #return Response(dumps(a),mimetype="application/json")
     return dumps(a, ensure_ascii=False)
-# def holder_search():
-#     curs = db403.cursor()
-#     try:
-#         id = request.args["id"]
-#         depth = request.args["depth"]
-#     except KeyError:
-#         return []
-#     else:
-#         query = "SELECT * FROM enterprise where id = %s"
-#         param = (id,)
-#         curs.execute(query, param)
-#         rv1 = curs.fetchall()
-#         name = rv1[0][1]
-#         name = [name]  #字符串变成数组
-#         depth = int(depth)  #字符串变成整型
-#         #print(type(name))
-#         a = combine(name,depth)
-#     #return Response(dumps(a),mimetype="application/json")
-#     return dumps(a, ensure_ascii=False)
+@app.route("/holderid")
+def holder_search2():
+    curs = db403.cursor()
+    try:
+        id = request.args["id"]
+        depth = request.args["depth"]
+    except KeyError:
+        return []
+    else:
+        query = "SELECT * FROM enterprise where id = %s"
+        param = (id,)
+        curs.execute(query, param)
+        rv1 = curs.fetchall()
+        name = rv1[0][1]
+        name = [name]  #字符串变成数组
+        depth = int(depth)  #字符串变成整型
+        #print(type(name))
+        a = combine(name,depth)
+    #return Response(dumps(a),mimetype="application/json")
+    return dumps(a, ensure_ascii=False)
 
 @app.route("/graph")
 def get_graph():
