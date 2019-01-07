@@ -33,8 +33,12 @@ def queryholders(names,depth):
             param = (result,)
             curs.execute(query, param)
             rvs = curs.fetchall()
+            ids = None
             for t in rvs:
-                ids = t[1]
+                if t:
+                    ids = t[1]
+                else:
+                    ids = None    
             p = 0
             if len(result) < 4 and len(result) > 1:
                 p = 2
@@ -66,8 +70,12 @@ def queryholders2(names,depth):
             param2 = (result2,)
             curs.execute(query2, param2)
             rv2 = curs.fetchall()
+            ids = None
             for t in rv2:
-                ids = t[1]
+                if t:
+                    ids = t[1]
+                else:
+                    ids = None               
             p2 = 0
             if len(result2) < 4 and len(result2) > 1:
                 p2 = 2
