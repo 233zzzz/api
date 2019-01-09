@@ -208,7 +208,7 @@ def enterprise_search():
     try:
         id = request.args["id"]
     except KeyError:
-        return []
+        return dumps([])
     else:
         query = "SELECT * FROM enterprise where id = %s"
         param = (id,)
@@ -224,13 +224,13 @@ def holder_search():
         name= request.args["name"]
         depth = request.args["depth"]
     except KeyError:
-        return []
+        return dumps([])
     else:
         name = [name]  #字符串变成数组
         depth = int(depth)  #字符串变成整型
         #print(type(name))
         a = combine(name,depth)
-    #return Response(dumps(a),mimetype="application/json")
+    #return Response(dumps(a), mimetype="application/json")
     return dumps(a, ensure_ascii=False)
 @app.route("/holderid")
 def holder_search2():
@@ -239,7 +239,7 @@ def holder_search2():
         id = request.args["id"]
         depth = request.args["depth"]
     except KeyError:
-        return []
+        return dumps([])
     else:
         query = "SELECT * FROM enterprise where id = %s"
         param = (id,)
